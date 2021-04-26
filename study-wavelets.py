@@ -11,27 +11,27 @@ import pywt
 from scipy.fft import fft
 from scipy import signal
 
-def butter_lowpass(cutoff, fs, order=5):
+def butter_lowpass(cutoff, fs, order=5):    #butterworth lowpass filter coeffs
     nyq = 0.5 * fs
     normal_cutoff = cutoff / nyq
     b, a = signal.butter(order, normal_cutoff, btype='low', analog=False)
     return b, a
-def butter_lowpass_filter(data, cutoff, fs, order=5):
+def butter_lowpass_filter(data, cutoff, fs, order=5):   #butterworth lowpass filter returned signal function
     b, a = butter_lowpass(cutoff, fs, order=order)
     y = signal.filtfilt(b, a, data)
     return y
 
-def butter_highpass(cutoff, fs, order=5):
+def butter_highpass(cutoff, fs, order=5):   #high pass filter coeffs
     nyq = 0.5 * fs
     normal_cutoff = cutoff / nyq
     b, a = signal.butter(order, normal_cutoff, btype='high', analog=False)
     return b, a
-def butter_highpass_filter(data, cutoff, fs, order=5):
+def butter_highpass_filter(data, cutoff, fs, order=5):  #high pass filter output
     b, a = butter_highpass(cutoff, fs, order=order)
     y = signal.filtfilt(b, a, data)
     return y
 
-def fastFourier(N,T,y,title):
+def fastFourier(N,T,y,title):       #Fast Fourier Transform
     # Number of sample points = N
     # sample spacing = T
     #sample values = y
@@ -50,11 +50,12 @@ def fastFourier(N,T,y,title):
 
 names = pw.wavelist(kind='discrete')    #different mother wavelets supported by pywt
 
+#creating the sample signals
 t = np.linspace(0,1,1000)
 x = 0.001*np.sin(2*np.pi*10*t)
 xr = 0.001*np.sin(2*np.pi*10*t)
 extra = np.sin(2*np.pi*20*t)
-for i in range(1000):
+for i in range(1000):   #loop to add random noise to data
     x[i] += (np.random.random()*2-1)*0.1
 
 #plt.subplot(212)
@@ -76,7 +77,7 @@ l = pywt.dwt_max_level(1000, motherWave)
 coeffs = pywt.wavedec(x, motherWave, level=l)
 for i in range(l):
     coeffs[i] = pywt.threshold_firm(coeffs[i], value_low=0.1, value_high=1)
-xx = pywt.waverec(coeffs, motherWave)
+rec = pywt.waverec(coeffs, motherWave)
 
 #plt.subplot(211)
 plt.plot(t,xx)
@@ -85,7 +86,7 @@ plt.title('re-con')
 plt.show()
 
 
-fildwt = butter_lowpass_filter(xx, 15, 1000,order=5)
+fildwt = butter_lowpass_filter(rec, 15, 1000,order=5)
 fildwt = butter_highpass_filter(fildwt, 5, 1000, order=5)
 
 plt.plot(t,fildwt)
