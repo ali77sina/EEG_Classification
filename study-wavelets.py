@@ -2,6 +2,7 @@
 """
 @author: Sina
 """
+# Simple tool to use to compare the denoising DWT can achieve for different applications
 
 import pywt as pw
 import numpy as np
@@ -47,7 +48,7 @@ def fastFourier(N,T,y,title):
     plt.show()
     return xf,abs(yf)
 
-names = pw.wavelist(kind='discrete')
+names = pw.wavelist(kind='discrete')    #different mother wavelets supported by pywt
 
 t = np.linspace(0,1,1000)
 x = 0.001*np.sin(2*np.pi*10*t)
