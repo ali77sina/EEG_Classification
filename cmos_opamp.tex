@@ -1,0 +1,51 @@
+
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{circuitikz}
+\begin{document}
+
+\begin{center}
+\begin{circuitikz}
+
+% Power rail
+\draw (0,6) node[vdd]{} to[short] (0,5.5) node[right]{$V_{dd}$};
+
+% PMOS current mirror M3 and M4
+\draw (0,5.5) to[pmos, l_=$M_4$] (0,4) -- (0,3.5);
+\draw (2,5.5) to[pmos, l=$M_3$] (2,4) -- (2,3.5);
+
+% NMOS Differential Pair M1 and M2
+\draw (0,3.5) to[nmos, l_=$M_1$] (0,2) -- (0,1.5);
+\draw (2,3.5) to[nmos, l=$M_2$] (2,2) -- (2,1.5);
+
+% Current source M5
+\draw (1,1.5) to[nmos, l=$M_5$] (1,0) node[ground]{};
+
+% Connect sources to common node
+\draw (0,1.5) -- (1,1.5);
+\draw (2,1.5) -- (1,1.5);
+
+% Connect drains
+\draw (0,4) -- (0,3.5);
+\draw (2,4) -- (2,3.5);
+
+% Second stage gain transistor M6
+\draw (2,4) -- (4,4) to[pmos, l_=$M_6$] (4,2.5);
+
+% NMOS current source load M7
+\draw (4,2.5) to[nmos, l_=$M_7$] (4,0) node[ground]{};
+
+% Output
+\draw (4,2.5) -- (5,2.5) node[right]{$V_{out}$};
+
+% Miller compensation capacitor
+\draw (0,4) to[C, l_=$C_c$] (4,2.5);
+
+% Input labels
+\draw (-0.5,2.75) node[left]{$V_{in+}$};
+\draw (2.5,2.75) node[right]{$V_{in-}$};
+
+\end{circuitikz}
+\end{center}
+
+\end{document}
