@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from obspy.imaging.cm import obspy_sequential
 import os
 import pydicom
-
+aaa
 
 # img = nib.load(r'C:\Users\Sina\Desktop\head images\mni_icbm152_t2_tal_nlin_asym_09c.mnc')
 img = nib.load(r'C:\Users\Sina\Desktop\multiEEGMRI\ucl\sMRI\smri.img')
