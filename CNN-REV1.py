@@ -13,7 +13,7 @@ from obspy.imaging.cm import obspy_sequential
 import tensorflow as tf
 import pywt
 
-# hello my name is meow www qqq
+# hello my name is meow www qqq LOLOL
 
 #CNN model
 def generate_model():
