@@ -25,3 +25,4 @@ for i in range(193):      #loop to show sliced photos
     plt.pcolormesh(data[i], cmap = 'gray')
     plt.show()
 
+# added this for test
