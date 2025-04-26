@@ -14,6 +14,7 @@ import tensorflow as tf
 import pywt
 
 # hello my name is meow www qqq LOLOL
+# AABBCC
 
 #CNN model
 def generate_model():
