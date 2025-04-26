@@ -26,3 +26,4 @@ for i in range(193):      #loop to show sliced photos
     plt.show()
 
 # added this for test
+# test 2
